@@ -17,9 +17,9 @@ public interface GoogleIntegrationClient {
 
     InputStream getInputStream(String uri) throws IOException;
 
-    String getUriData(String uri);
+    String getUriData(String uri) throws IOException;
 
-    String HttpPostData(HttpPost httpPost);
+    String HttpPostData(HttpPost httpPost) throws IOException;
 
 
 

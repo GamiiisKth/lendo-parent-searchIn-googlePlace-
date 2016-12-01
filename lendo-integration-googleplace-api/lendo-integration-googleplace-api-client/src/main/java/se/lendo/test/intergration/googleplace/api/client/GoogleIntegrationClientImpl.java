@@ -46,6 +46,13 @@ public class GoogleIntegrationClientImpl implements GoogleIntegrationClient {
     }
 
 
+    /**
+     *
+     * @param uri https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyD4ztDjzUZ047Wpqvl36uPiiddocI8p-rY&location=44.478025,-73.196475&radius=50000.0&types=university
+     * @return
+     * @throws
+     */
+
     public InputStream getInputStream(String uri) throws IOException {
         HttpGet get = new HttpGet(uri);
         try {
@@ -57,11 +64,26 @@ public class GoogleIntegrationClientImpl implements GoogleIntegrationClient {
         }
     }
 
-    public String getUriData(String uri) {
-        return null;
+    public String getUriData(String uri) throws IOException {
+        HttpGet get = new HttpGet(uri);
+        try {
+            return readString(httpClient.execute(get));
+        } catch (Exception e) {
+            throw new IOException(e);
+        } finally {
+            get.releaseConnection();
+        }
+
     }
 
-    public String HttpPostData(HttpPost httpPost) {
-        return null;
+    public String HttpPostData(HttpPost httpPost) throws IOException {
+
+        try {
+            return readString(httpClient.execute(httpPost));
+        } catch (Exception e) {
+            throw new IOException(e);
+        } finally {
+            httpPost.releaseConnection();
+        }
     }
 }
