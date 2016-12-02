@@ -6,21 +6,18 @@
 
     <parent>
         <groupId>se.lendo.test</groupId>
-        <artifactId>lendo-backend-searchIn-googlePlace-component</artifactId>
+        <artifactId>lendo-integration-googleplace-api</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>lendo-backend-searchIn-googlePlace-component-domain</artifactId>
+    <artifactId>lendo-integration-googleplace-api-mapper</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
-    <!--
-    Common dependencies
-    -->
     <dependencies>
+
         <dependency>
             <groupId>se.lendo.test</groupId>
-            <artifactId>lendo-backend-searchIn-googlePlace-common-util</artifactId>
+            <artifactId>lendo-integration-googleplace-api-domain</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
@@ -28,8 +25,15 @@
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
 
     </dependencies>
-
-
+    
 </project>

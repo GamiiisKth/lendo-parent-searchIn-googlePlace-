@@ -17,6 +17,12 @@
     <modules>
 
         <module>lendo-integration-googleplace-api-client</module>
+        <module>lendo-integration-googleplace-api-domain</module>
+        <module>lendo-integration-googleplace-api-mapper</module>
+        <module>lendo-integration-googleplace-api-service</module>
+        <module>lendo-integration-googleplace-api-service-impl</module>
+        <module>lendo-integration-googleplace-api-test</module>
+
     </modules>
 
 
@@ -57,6 +63,9 @@
 
         </dependencies>
     </dependencyManagement>
+
+
+
 
     <build>
     <pluginManagement>

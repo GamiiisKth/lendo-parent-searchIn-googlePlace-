@@ -1,4 +1,4 @@
-package se.lendo.test.intergration.googleplace.api.client;
+package se.lendo.test.integration.googlePlaceApi.service;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
@@ -13,7 +13,7 @@ import java.io.InputStream;
 /**
  * @author Ali yusha {@literal <mailto:ali.yusha.hasan@gmail.com>}
  */
-public class GoogleIntegrationClientImpl implements GoogleIntegrationClient {
+public class GoogleIntegrationServiceImpl implements GoogleIntegrationService {
 
     // remove it and change it to spring static bean
     public static final String UTF8_CHARACTER_ENCODING = "UTF-8";
@@ -24,11 +24,11 @@ public class GoogleIntegrationClientImpl implements GoogleIntegrationClient {
     private String characterEncoding;
 
 
-    public GoogleIntegrationClientImpl(String characterEncoding) {
+    public GoogleIntegrationServiceImpl(String characterEncoding) {
         this.characterEncoding = characterEncoding;
     }
 
-    public GoogleIntegrationClientImpl() {
+    public GoogleIntegrationServiceImpl() {
         this(UTF8_CHARACTER_ENCODING);
     }
 
@@ -65,6 +65,7 @@ public class GoogleIntegrationClientImpl implements GoogleIntegrationClient {
     }
 
     public String getUriData(String uri) throws IOException {
+        // create a connection to send the uri
         HttpGet get = new HttpGet(uri);
         try {
             return readString(httpClient.execute(get));

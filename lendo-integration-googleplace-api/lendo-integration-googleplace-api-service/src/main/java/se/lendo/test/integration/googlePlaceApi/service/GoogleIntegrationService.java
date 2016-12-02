@@ -1,4 +1,4 @@
-package se.lendo.test.intergration.googleplace.api.client;
+package se.lendo.test.integration.googlePlaceApi.service;
 
 import org.apache.http.client.methods.HttpPost;
 
@@ -12,7 +12,7 @@ import java.io.InputStream;
  */
 
 
-public interface GoogleIntegrationClient {
+public interface GoogleIntegrationService {
 
 
     InputStream getInputStream(String uri) throws IOException;
@@ -20,7 +20,5 @@ public interface GoogleIntegrationClient {
     String getUriData(String uri) throws IOException;
 
     String HttpPostData(HttpPost httpPost) throws IOException;
-
-
 
 }
