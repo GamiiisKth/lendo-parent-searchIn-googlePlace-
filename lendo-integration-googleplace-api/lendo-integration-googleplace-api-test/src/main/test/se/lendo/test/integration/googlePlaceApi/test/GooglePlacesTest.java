@@ -31,7 +31,7 @@ public class GooglePlacesTest {
     @Before
     public void setUp() {
         try {
-           // InputStream in = GooglePlacesTest.class.getResourceAsStream("/" + API_KEY_FILE_NAME);
+            // InputStream in = GooglePlacesTest.class.getResourceAsStream("/" + API_KEY_FILE_NAME);
             google = new GooglePlaceApiSearchClientImpl("AIzaSyD4ztDjzUZ047Wpqvl36uPiiddocI8p-rY");
             google.setDebugModeEnabled(true);
         } catch (Exception e) {
@@ -45,11 +45,23 @@ public class GooglePlacesTest {
         if (!findPlace(google.getNearbyPlaces(TEST_PLACE_LAT, TEST_PLACE_LNG, MAXIMUM_RADIUS_SEARCH,
                 MAXIMUM_PAGE_RESULTS, TypeParam.name("types").value(SearchType.TYPE_UNIVERSITY)), TEST_PLACE_NAME))
             fail("Test place could not be found at coordinates.");
+    }
 
-       /* if (!hasAtLeastAPlace(google.getNearbyPlacesRankedByDistance(TEST_PLACE_LAT, TEST_PLACE_LNG, MAXIMUM_PAGE_RESULTS,
-                Param.name("name").value(TEST_PLACE_NAME))))
-            fail("Test place could not be found at coordinates.");*/
-        // contain within one method to prevent threading problemstestGetNearbyPlaces();
+    @Test
+    public void getPlaceByQuery() {
+
+        if (!findPlace(google.getPlacesByQuery("SATS", MAXIMUM_PAGE_RESULTS, TypeParam.name("types").value(SearchType.TYPE_GYM))
+                , "SATS Sveavägen"))
+            fail("Test place could not be found at coordinates.");
+    }
+
+    @Test
+    public void getPlaceByQuerySearchByRadius(){
+
+        if (!findPlace(google.getPlacesByQueryBasedOnRadar("Sergels torg", MAXIMUM_PAGE_RESULTS,2000.0,TypeParam.name("types").value(SearchType.BICYCLE_STORE)),
+                "EcoRide Stockholm Sergels Torg"))
+            fail("Test place could not be found at coordinates.");
+
     }
 
     public void testGetNearbyPlaces() {
@@ -58,44 +70,18 @@ public class GooglePlacesTest {
                 MAXIMUM_PAGE_RESULTS, TypeParam.name("types").value(SearchType.TYPE_UNIVERSITY)), TEST_PLACE_NAME))
             fail("Test place could not be found at coordinates.");
 
-       /* if (!hasAtLeastAPlace(google.getNearbyPlaces(TEST_PLACE_LAT, TEST_PLACE_LNG, MAXIMUM_RADIUS_SEARCH,
-                TypeParam.name("types").value(Arrays.asList(SearchType.BICYCLE_STORE, SearchType.BUS_STATION)))))
-            fail("Test place could not be found at coordinates.");
-*/
-        // testGetPlacesByQuery();
     }
-
-
-   /* public void testGetPlacesByQuery() {
-        System.out.println("******************** getPlacesByQuery ********************");
-        if (!findPlace(google.getPlacesByQuery(TEST_PLACE_NAME, MAXIMUM_RESULTS), TEST_PLACE_NAME))
-            fail("Test place could not be found by name");
-        testGetPlacesByRadar();
-    }
-
-    public void testGetPlacesByRadar() {
-        System.out.println("******************** getPlacesByRadar ********************");
-        List<Place> places = google.getPlacesByRadar(TEST_PLACE_LAT, TEST_PLACE_LNG, MAXIMUM_RADIUS,
-                MAXIMUM_RESULTS, Param.name("name").value(TEST_PLACE_NAME));
-        boolean found = false;
-        for (Place place : places) {
-            if (place.getDetails().getName().equals(TEST_PLACE_NAME))
-                found = true;
-        }
-        if (!found)
-            fail("Test place could not be found using the radar method.");
-    }
-
-   */
 
     private boolean findPlace(List<Place> places, String name) {
         boolean found = false;
         for (Place place : places) {
+            System.out.println(place);
             if (place.getName().equals(name))
                 found = true;
         }
         return found;
     }
+
     private boolean hasAtLeastAPlace(List<Place> places) {
         return (places != null) && places.size() > 0;
     }

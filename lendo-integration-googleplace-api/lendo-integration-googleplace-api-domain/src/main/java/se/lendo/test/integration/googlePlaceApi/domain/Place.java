@@ -29,6 +29,27 @@ public class Place {
     private int accuracy;
     private String lang;
 
+    //we should add required.notNull
+    private Place(Builder builder) {
+        this.types = builder.types;
+        this.placeId = builder.placeId;
+        this.lat = builder.lat;
+        this.lng = builder.lng;
+        this.json = builder.json;
+        this.iconUrl = builder.iconUrl;
+        this.icon = builder.icon;
+        this.name = builder.name;
+        this.addr = builder.addr;
+        this.vicinity = builder.vicinity;
+        this.rating = builder.rating;
+        this.phone = builder.phone;
+        this.internationalPhone = builder.internationalPhone;
+        this.googleUrl = builder.googleUrl;
+        this.website = builder.website;
+        this.utcOffset = builder.utcOffset;
+        this.accuracy = builder.accuracy;
+        this.lang = builder.lang;
+    }
 
     public String getPlaceId() {
         return placeId;
@@ -98,28 +119,83 @@ public class Place {
         return lang;
     }
 
-    //we should add required.notNull
-    private Place(Builder builder) {
-        this.types = builder.types;
-        this.placeId = builder.placeId;
-        this.lat = builder.lat;
-        this.lng = builder.lng;
-        this.json = builder.json;
-        this.iconUrl = builder.iconUrl;
-        this.icon = builder.icon;
-        this.name = builder.name;
-        this.addr = builder.addr;
-        this.vicinity = builder.vicinity;
-        this.rating = builder.rating;
-        this.phone = builder.phone;
-        this.internationalPhone = builder.internationalPhone;
-        this.googleUrl = builder.googleUrl;
-        this.website = builder.website;
-        this.utcOffset = builder.utcOffset;
-        this.accuracy = builder.accuracy;
-        this.lang = builder.lang;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Place)) return false;
+
+        Place place = (Place) o;
+
+        if (Double.compare(place.lat, lat) != 0) return false;
+        if (Double.compare(place.lng, lng) != 0) return false;
+        if (Double.compare(place.rating, rating) != 0) return false;
+        if (utcOffset != place.utcOffset) return false;
+        if (accuracy != place.accuracy) return false;
+        if (placeId != null ? !placeId.equals(place.placeId) : place.placeId != null) return false;
+        if (json != null ? !json.equals(place.json) : place.json != null) return false;
+        if (iconUrl != null ? !iconUrl.equals(place.iconUrl) : place.iconUrl != null) return false;
+        if (icon != null ? !icon.equals(place.icon) : place.icon != null) return false;
+        if (name != null ? !name.equals(place.name) : place.name != null) return false;
+        if (addr != null ? !addr.equals(place.addr) : place.addr != null) return false;
+        if (vicinity != null ? !vicinity.equals(place.vicinity) : place.vicinity != null) return false;
+        if (phone != null ? !phone.equals(place.phone) : place.phone != null) return false;
+        if (internationalPhone != null ? !internationalPhone.equals(place.internationalPhone) : place.internationalPhone != null)
+            return false;
+        if (googleUrl != null ? !googleUrl.equals(place.googleUrl) : place.googleUrl != null) return false;
+        if (website != null ? !website.equals(place.website) : place.website != null) return false;
+        return lang != null ? lang.equals(place.lang) : place.lang == null;
+
     }
 
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = placeId != null ? placeId.hashCode() : 0;
+        temp = Double.doubleToLongBits(lat);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(lng);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (json != null ? json.hashCode() : 0);
+        result = 31 * result + (iconUrl != null ? iconUrl.hashCode() : 0);
+        result = 31 * result + (icon != null ? icon.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (addr != null ? addr.hashCode() : 0);
+        result = 31 * result + (vicinity != null ? vicinity.hashCode() : 0);
+        temp = Double.doubleToLongBits(rating);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + (internationalPhone != null ? internationalPhone.hashCode() : 0);
+        result = 31 * result + (googleUrl != null ? googleUrl.hashCode() : 0);
+        result = 31 * result + (website != null ? website.hashCode() : 0);
+        result = 31 * result + utcOffset;
+        result = 31 * result + accuracy;
+        result = 31 * result + (lang != null ? lang.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Place{" +
+                "placeId='" + placeId + '\'' +
+                ", lat=" + lat +
+                ", lng=" + lng +
+                ", json=" + json +
+                ", iconUrl='" + iconUrl + '\'' +
+                ", icon=" + icon +
+                ", name='" + name + '\'' +
+                ", addr='" + addr + '\'' +
+                ", vicinity='" + vicinity + '\'' +
+                ", rating=" + rating +
+                ", phone='" + phone + '\'' +
+                ", internationalPhone='" + internationalPhone + '\'' +
+                ", googleUrl='" + googleUrl + '\'' +
+                ", website='" + website + '\'' +
+                ", utcOffset=" + utcOffset +
+                ", accuracy=" + accuracy +
+                ", lang='" + lang + '\'' +
+                '}';
+    }
 
     public static Builder builder() {
         return new Builder();

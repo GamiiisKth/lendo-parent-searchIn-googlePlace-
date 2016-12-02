@@ -2,6 +2,8 @@ package se.lendo.test.intergration.googleplace.api.client;
 
 import se.lendo.test.common.googlePlaceApi.exception.GooglePlacesException;
 import se.lendo.test.common.googlePlaceApi.param.Param;
+import se.lendo.test.common.googlePlaceApi.param.TypeParam;
+import se.lendo.test.common.googlePlaceApi.search.SearchType;
 import se.lendo.test.integration.googlePlaceApi.domain.Place;
 import se.lendo.test.integration.googlePlaceApi.mapper.PlaceMapper;
 import se.lendo.test.integration.googlePlaceApi.service.GoogleIntegrationService;
@@ -89,6 +91,28 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
     }
 
     @Override
+    public  List<Place> getPlacesByQuery(String query, int limit, Param... extraParams) {
+        try {
+            String uri = buildUrl(METHOD_TEXT_SEARCH, String.format("query=%s&key=%s", query, googleApiKey), extraParams);
+            return getPlaces(uri, METHOD_TEXT_SEARCH, limit);
+        } catch (Exception e) {
+            throw new GooglePlacesException(e);
+        }
+    }
+
+
+    @Override
+    public List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, double radius, Param... extraParams) {
+
+        try {
+            String uri = buildUrl(METHOD_TEXT_SEARCH, String.format("query=%s&key=%s&radius=%s", query, googleApiKey,String.valueOf(radius)), extraParams);
+            return getPlaces(uri, METHOD_TEXT_SEARCH, limit);
+        } catch (Exception e) {
+            throw new GooglePlacesException(e);
+        }
+    }
+
+    @Override
     public List<Place> getNearbyPlaces(double lat, double lng, double radius, Param... extraParams) {
         return getNearbyPlaces(lat, lng, radius, DEFAULT_RESULTS, extraParams);
     }
@@ -114,12 +138,15 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
      * REMOVE all methods below to other class !!!
      */
 
-
     private static String buildUrl(String method, String params, Param... extraParams) {
         String url = String.format(Locale.ENGLISH, API_URL_FORMAT_STRING, GOOGLE_API_URL, method, params);
         url = addExtraParams(url, extraParams);
         url = url.replace(' ', '+');
+
+        System.out.println( url);
+
         return url;
+
     }
 
 
@@ -141,7 +168,7 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
             String raw = googleIntegrationService.getUriData(uri);
             // write out the result
 
-            debug(raw);
+             debug(raw);
 
             /**
              * the result from google which is repesented as json
@@ -157,7 +184,7 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
              !!! this method should running on other thread without blocking the main thread
              */
 
-            for (int returnedPlace = 0; returnedPlace < SINGLE_PAGE_MAXIMUM_RESULTS; returnedPlace++) {
+            for (int returnedPlace = 0; returnedPlace < jsonDataResult.getReturnedJsonDataFromGoogleUri().length(); returnedPlace++) {
                 places.add(PlaceMapper.map(jsonDataResult.getReturnedJsonDataFromGoogleUri().getJSONObject(returnedPlace)));
             }
 
@@ -166,11 +193,12 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
             if (jsonDataResult.getNextPageTokenData() != null && i < pages - 1) {
                 limit -= MAXIMUM_PAGE_RESULTS;
                 uri = String.format("%s%s/json?pagetoken=%s&key=%s", GOOGLE_API_URL, method, jsonDataResult.getNextPageTokenData(), googleApiKey);
+
+                // remove this and use linkedBlockedQueue
                 sleep(3000); // Page tokens have a delay before they are available
             } else {
                 break;
             }
-
 
 
         }
@@ -192,6 +220,7 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
             e.printStackTrace();
         }
     }
+
     private void debug(String msg) {
         if (debugModeEnabled)
             System.out.println(msg);

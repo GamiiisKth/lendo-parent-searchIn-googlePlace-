@@ -19,6 +19,7 @@ set -e
 buildOrder=(
 		'dependency-management'
 		'lendo-parent-searchIn-googlePlace'
+		'lendo-searchIn-googlePlace-common'
 		'lendo-integration-googleplace-api'
 		'lendo-backend-searchIn-googlePlace'
 		'lendo-endpoint-searchIn-googlePlace'

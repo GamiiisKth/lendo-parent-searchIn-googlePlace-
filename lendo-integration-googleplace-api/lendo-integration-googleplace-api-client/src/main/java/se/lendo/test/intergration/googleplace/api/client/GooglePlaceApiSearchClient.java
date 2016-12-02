@@ -363,6 +363,9 @@ public interface GooglePlaceApiSearchClient {
      */
     void setRequestHandler(GoogleIntegrationService requestHandler);
 
+    List<Place> getPlacesByQuery(String query, int limit, Param... extraParams);
+
+    List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, double radius,Param... extraParams);
 
     // create a class with builder class that have lat and all other
     List<Place> getNearbyPlaces(double lat, double lng, double radius, int limit, Param... extraParams);
