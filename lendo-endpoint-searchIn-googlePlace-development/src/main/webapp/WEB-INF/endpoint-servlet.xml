@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+    <!--only mvc will be loaded to servlet-->
+    <!--this bean will load @controller bean to servlet-->
+    <context:component-scan base-package="se.joshua.spring.web.controllers"/>
+    <context:component-scan base-package="se.joshua.spring.web.util"/>
+
+    <!--we want the annotation @controller to be find so this bean will allow us-->
+    <mvc:annotation-driven/>
+
+    <!--this means even subfolder can be accessed /**  -->
+    <mvc:resources mapping="/static/**" location="/resources/"/>
+
+
+    <!--  this bean will translate the RequestMapping returned name to view -->
+    <bean id="jspViewResolver" class=" org.springframework.web.servlet.view.InternalResourceViewResolver">
+
+        <!-- this is how to tell spring how to find view for the returned name from RequestMapping-->
+        <property name="prefix" value="/WEB-INF/jsps/"/>
+
+        <!-- the view which will be returned is type of .jsp-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
