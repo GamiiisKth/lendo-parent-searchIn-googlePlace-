@@ -8,6 +8,66 @@
     <artifactId>lendo-searchIn-googlePlace-common</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <dependency.version>1.0-SNAPSHOT</dependency.version>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>se.lendo.test</groupId>
+                <artifactId>json-20140107</artifactId>
+                <version>${dependency.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>se.lendo.test</groupId>
+                <artifactId>spring-framework-4.1.1</artifactId>
+                <version>${dependency.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>se.lendo.test</groupId>
+                <artifactId>commons-io-1.3.2</artifactId>
+                <version>${dependency.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>se.lendo.test</groupId>
+                <artifactId>httpclient-4.3.5</artifactId>
+                <version>${dependency.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>se.lendo.test</groupId>
+            <artifactId>lendo-searchIn-googlePlace-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+    </dependencies>
+
 
     <build>
         <pluginManagement>

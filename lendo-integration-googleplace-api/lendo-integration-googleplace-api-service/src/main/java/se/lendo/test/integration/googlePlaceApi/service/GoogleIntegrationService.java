@@ -8,7 +8,7 @@ import java.io.InputStream;
 /**
  * @author Ali yusha {@literal <mailto:ali.yusha.hasan@gmail.com>}
  *
- *  request forwarder to google api
+ *  request forwarder to google clinet
  */
 
 

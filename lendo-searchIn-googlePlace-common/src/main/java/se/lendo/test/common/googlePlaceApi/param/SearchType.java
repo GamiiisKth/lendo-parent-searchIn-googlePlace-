@@ -1,4 +1,4 @@
-package se.lendo.test.common.googlePlaceApi.search;
+package se.lendo.test.common.googlePlaceApi.param;
 
 /**
  * @author Ali yusha {@literal <mailto:ali.yusha.hasan@gmail.com>}

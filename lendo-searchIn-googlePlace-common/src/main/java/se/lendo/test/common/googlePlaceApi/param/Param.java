@@ -12,7 +12,7 @@ public class Param {
     }
 
     /**
-     * Returns a new param with the specified name.
+     * Returns a new param with the specified valueOf.
      *
      * @param name to create Param from
      * @return new param
@@ -22,12 +22,12 @@ public class Param {
     }
 
     /**
-     * Sets the value of the Param.
+     * Sets the searchTypeValue of the Param.
      *
      * @param value of param
      * @return this param
      */
-    public Param value(Object value) {
+    public Param searchTypeValue(Object value) {
         this.value = value.toString();
         return this;
     }

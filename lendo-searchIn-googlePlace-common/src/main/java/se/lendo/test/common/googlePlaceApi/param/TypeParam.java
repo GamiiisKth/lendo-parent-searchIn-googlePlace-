@@ -12,12 +12,12 @@ public class TypeParam extends Param {
     }
 
     /**
-     * Returns a new type param with the specified name.
+     * Returns a new type param with the specified valueOf.
      *
      * @param name to create TypeParam from
      * @return new param
      */
-    public static TypeParam name(String name) {
+    public static TypeParam valueOf(String name) {
         return new TypeParam(name);
     }
 
@@ -27,7 +27,7 @@ public class TypeParam extends Param {
      * @param values of params
      * @return this params
      */
-    public Param value(List<String> values) {
+    public Param valueOf(List<String> values) {
         StringBuilder valuesSb = new StringBuilder();
         for (int i = 0; i < values.size(); i++) {
             valuesSb.append(values.get(i));

@@ -2,7 +2,7 @@ package se.lendo.test.integration.googlePlaceApi.mapper;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import se.lendo.test.integration.googlePlaceApi.domain.Place;
+import se.lendo.test.common.googlePlaceApi.domain.Place;
 
 import java.util.ArrayList;
 import java.util.List;

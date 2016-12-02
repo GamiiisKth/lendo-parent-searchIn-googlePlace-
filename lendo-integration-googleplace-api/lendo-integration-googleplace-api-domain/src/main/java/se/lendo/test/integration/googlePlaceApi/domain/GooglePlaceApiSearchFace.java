@@ -1,7 +1,7 @@
 package se.lendo.test.integration.googlePlaceApi.domain;
 
 import se.lendo.test.common.googlePlaceApi.request.RequestStatus;
-import se.lendo.test.common.googlePlaceApi.search.SearchType;
+import se.lendo.test.common.googlePlaceApi.param.SearchType;
 
 /**
  * @author Ali yusha {@literal <mailto:ali.yusha.hasan@gmail.com>}
@@ -9,7 +9,7 @@ import se.lendo.test.common.googlePlaceApi.search.SearchType;
 public interface GooglePlaceApiSearchFace extends SearchType, RequestStatus {
 
 
-    String GOOGLE_API_URL= "https://maps.googleapis.com/maps/api/place/";
+    String GOOGLE_API_URL= "https://maps.googleapis.com/maps/clinet/place/";
 
     int SINGLE_PAGE_MAXIMUM_RESULTS = 20;
 
@@ -202,7 +202,7 @@ public interface GooglePlaceApiSearchFace extends SearchType, RequestStatus {
     String STRING_ICON = "icon";
 
     /**
-     * The name of the place
+     * The valueOf of the place
      */
     String STRING_NAME = "name";
 
@@ -262,12 +262,12 @@ public interface GooglePlaceApiSearchFace extends SearchType, RequestStatus {
     String STRING_PHOTO_REFERENCE = "photo_reference";
 
     /**
-     * Represents an address component's long name
+     * Represents an address component's long valueOf
      */
     String STRING_LONG_NAME = "long_name";
 
     /**
-     * Represents an address component's short name
+     * Represents an address component's short valueOf
      */
     String STRING_SHORT_NAME = "short_name";
 
@@ -299,7 +299,7 @@ public interface GooglePlaceApiSearchFace extends SearchType, RequestStatus {
     /**
      * Used for autocomplete terms
      */
-    String STRING_VALUE = "value";
+    String STRING_VALUE = "searchTypeValue";
 
     /**
      * Used for singular types in review aspects

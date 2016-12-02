@@ -2,9 +2,7 @@ package se.lendo.test.intergration.googleplace.api.client;
 
 import se.lendo.test.common.googlePlaceApi.exception.GooglePlacesException;
 import se.lendo.test.common.googlePlaceApi.param.Param;
-import se.lendo.test.common.googlePlaceApi.param.TypeParam;
-import se.lendo.test.common.googlePlaceApi.search.SearchType;
-import se.lendo.test.integration.googlePlaceApi.domain.Place;
+import se.lendo.test.common.googlePlaceApi.domain.Place;
 import se.lendo.test.integration.googlePlaceApi.mapper.PlaceMapper;
 import se.lendo.test.integration.googlePlaceApi.service.GoogleIntegrationService;
 import se.lendo.test.integration.googlePlaceApi.service.GoogleIntegrationServiceImpl;
@@ -13,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author Ali yusha {@literal <mailto:ali.yusha.hasan@gmail.com>}
@@ -24,6 +23,7 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
      * Argument #2: API Method
      * Argument #3: API Method arguments
      */
+
     public static String API_URL_FORMAT_STRING = "%s%s/json?%s";
 
     static String GOOGLE_API_URL = "https://maps.googleapis.com/maps/api/place/";
@@ -32,6 +32,7 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
     private GoogleIntegrationService googleIntegrationService;
     private String googleApiKey;
     private boolean debugModeEnabled;
+    private LinkedBlockingQueue<String> responseAvailable = new LinkedBlockingQueue<>();
 
     public GooglePlaceApiSearchClientImpl(String googleApiKey) {
 
@@ -91,7 +92,7 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
     }
 
     @Override
-    public  List<Place> getPlacesByQuery(String query, int limit, Param... extraParams) {
+    public List<Place> getPlacesByQuery(String query, int limit, Param... extraParams) {
         try {
             String uri = buildUrl(METHOD_TEXT_SEARCH, String.format("query=%s&key=%s", query, googleApiKey), extraParams);
             return getPlaces(uri, METHOD_TEXT_SEARCH, limit);
@@ -105,7 +106,7 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
     public List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, double radius, Param... extraParams) {
 
         try {
-            String uri = buildUrl(METHOD_TEXT_SEARCH, String.format("query=%s&key=%s&radius=%s", query, googleApiKey,String.valueOf(radius)), extraParams);
+            String uri = buildUrl(METHOD_TEXT_SEARCH, String.format("query=%s&key=%s&radius=%s", query, googleApiKey, String.valueOf(radius)), extraParams);
             return getPlaces(uri, METHOD_TEXT_SEARCH, limit);
         } catch (Exception e) {
             throw new GooglePlacesException(e);
@@ -143,7 +144,7 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
         url = addExtraParams(url, extraParams);
         url = url.replace(' ', '+');
 
-        System.out.println( url);
+        System.out.println(url);
 
         return url;
 
@@ -154,6 +155,7 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
         limit = Math.min(limit, MAXIMUM_PAGE_RESULTS); // max of 60 results possible
         int pages = (int) Math.ceil(limit / (double) SINGLE_PAGE_MAXIMUM_RESULTS);
 
+
         // remove it and get this as retur
         List<Place> places = new ArrayList<>();
 
@@ -161,14 +163,13 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
         for (int i = 0; i < pages; i++) {
             debug("Page: " + (i + 1));
 
+
             /**
              * the result from google which is repesented as json
              */
 
-            String raw = googleIntegrationService.getUriData(uri);
-            // write out the result
-
-             debug(raw);
+            String raw=googleIntegrationService.getUriData(uri);
+            debug(raw);
 
             /**
              * the result from google which is repesented as json

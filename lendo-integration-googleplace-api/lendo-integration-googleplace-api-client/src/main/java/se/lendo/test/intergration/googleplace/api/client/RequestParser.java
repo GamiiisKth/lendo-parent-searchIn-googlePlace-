@@ -28,7 +28,7 @@ public class RequestParser {
 
         //  parseResults(results, Math.min(limit, MAXIMUM_PAGE_RESULTS));
 
-        // the next_page_token key value will returned and next request by this meta data will be send
+        // the next_page_token key searchTypeValue will returned and next request by this meta data will be send
         // createJsonFromReturnedDataFromGoogleUri.optString(STRING_NEXT_PAGE_TOKEN, null)
 
         return new JsonDataResult(createJsonFromReturnedDataFromGoogleUri.optString(STRING_NEXT_PAGE_TOKEN, null), results);

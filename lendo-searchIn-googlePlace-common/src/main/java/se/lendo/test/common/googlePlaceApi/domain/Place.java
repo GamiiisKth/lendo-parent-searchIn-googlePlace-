@@ -1,4 +1,5 @@
-package se.lendo.test.integration.googlePlaceApi.domain;
+package se.lendo.test.common.googlePlaceApi.domain;
+
 
 import org.json.JSONObject;
 

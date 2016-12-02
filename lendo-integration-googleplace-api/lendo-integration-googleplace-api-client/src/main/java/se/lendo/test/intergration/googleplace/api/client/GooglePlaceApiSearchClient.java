@@ -2,7 +2,7 @@ package se.lendo.test.intergration.googleplace.api.client;
 
 
 
-import se.lendo.test.integration.googlePlaceApi.domain.Place;
+import se.lendo.test.common.googlePlaceApi.domain.Place;
 import se.lendo.test.common.googlePlaceApi.exception.GooglePlacesException;
 import se.lendo.test.common.googlePlaceApi.param.Param;
 import se.lendo.test.integration.googlePlaceApi.service.GoogleIntegrationService;
@@ -205,9 +205,9 @@ public interface GooglePlaceApiSearchClient {
     String STRING_ICON = "icon";
 
     /**
-     * The name of the place
+     * The valueOf of the place
      */
-    String STRING_NAME = "name";
+    String STRING_NAME = "valueOf";
 
     /**
      * The address of the place
@@ -265,12 +265,12 @@ public interface GooglePlaceApiSearchClient {
     String STRING_PHOTO_REFERENCE = "photo_reference";
 
     /**
-     * Represents an address component's long name
+     * Represents an address component's long valueOf
      */
     String STRING_LONG_NAME = "long_name";
 
     /**
-     * Represents an address component's short name
+     * Represents an address component's short valueOf
      */
     String STRING_SHORT_NAME = "short_name";
 
@@ -302,7 +302,7 @@ public interface GooglePlaceApiSearchClient {
     /**
      * Used for autocomplete terms
      */
-    String STRING_VALUE = "value";
+    String STRING_VALUE = "searchTypeValue";
 
     /**
      * Used for singular types in review aspects
@@ -335,7 +335,7 @@ public interface GooglePlaceApiSearchClient {
     /**
      * Returns the API key associated with this GooglePlaces object.
      *
-     * @return api key
+     * @return clinet key
      */
     String getApiKey();
 

@@ -1,8 +1,11 @@
 package se.lendo.test.backend.googlePlaceApi.component.service;
 
 import org.json.JSONObject;
+import se.lendo.test.common.googlePlaceApi.domain.Place;
+import se.lendo.test.common.googlePlaceApi.param.Param;
 
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author Ali yusha {@literal <mailto:ali.yusha.hasan@gmail.com>}
@@ -16,5 +19,9 @@ public interface SearchPlaceService {
 
    // we should get a PlaceModels from integration side instead
    // solution should be this json object should be mapped to a model in integration-mapper och modelMapper
-   JSONObject getSearchDetailes(String type, String where, int radious );
+   List<Place> getPlacesByQuery(String query, int limit, Param... extraParams);
+
+   List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, double radius, Param... extraParams);
+
+
 }
