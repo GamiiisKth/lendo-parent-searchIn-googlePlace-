@@ -1,7 +1,6 @@
 package se.lendo.test.googlePlaceApi.endpoint.api;
 
 import io.swagger.annotations.Api;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.bind.annotation.*;
 import se.lendo.test.common.googlePlaceApi.domain.Place;
 import se.lendo.test.common.googlePlaceApi.param.SearchType;
@@ -29,30 +28,16 @@ public class SearchPlaceRestService {
      *
      * @return
      */
-    @RequestMapping(value = "/{place}", method = RequestMethod.GET)
+    @RequestMapping(value = "{place}/{radius}", method = RequestMethod.GET)
     @ResponseBody
-    public Place getPlaces(@PathVariable String place, @PathVariable int limit) {
+    public List<Place> getPlaces(@PathVariable String place, @PathVariable int radius) {
 
-        System.out.println("hej");
+      //  System.out.println("hej");
 
-        List<Place> places = searchPlaceClient.getPlacesByQuery(place, limit, TypeParam.valueOf("types").searchTypeValue(SearchType.TYPE_GYM));
+        return searchPlaceClient.getPlacesByQueryBasedOnRadar(place, 60, radius, TypeParam.valueOf("types").searchTypeValue(SearchType.BICYCLE_STORE));
 
 
-        return places.get(1);
     }
 
-
-    /*public static void main(String[] args) {
-
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("lendo-endpoint-searchIn-googlePlace-client.xml");
-        SearchPlaceClient searchPlaceClient = (SearchPlaceClient) context.getBean("searchPlaceClient");
-
-        List<Place> places = searchPlaceClient.getPlacesByQuery("sats", 60, TypeParam.valueOf("types").searchTypeValue(SearchType.TYPE_GYM));
-
-        for (Place place1 : places) {
-            System.out.println(place1);
-        }
-
-    }*/
 
 }

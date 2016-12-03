@@ -6,9 +6,10 @@
 
     <parent>
         <groupId>se.lendo.test</groupId>
-        <artifactId>lendo-parent-searchIn-googlePlace</artifactId>
+        <artifactId>lendo-endpoint-searchIn-googlePlace</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
 
     <artifactId>lendo-endpoint-searchIn-googlePlace-development</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -19,6 +20,13 @@
         <projectBaseUri>${project.baseUri}</projectBaseUri>
         <java.version>1.6</java.version>
         <servlet-api.version>3.0-alpha-1</servlet-api.version>
+        <!--jetty-->
+
+        <jetty.port>8029</jetty.port>
+        <jetty.stopPort>9998</jetty.stopPort>
+        <jetty.stopKey>foo</jetty.stopKey>
+        <jetty.daemon>false</jetty.daemon>
+        <jetty.contextPath>/i10</jetty.contextPath>
     </properties>
 
     <dependencies>
@@ -44,60 +52,38 @@
     </dependencies>
 
     <build>
+        <finalName>i10</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <skipTests>true</skipTests>
                 </configuration>
             </plugin>
-
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-
-
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
-                    <port>8080</port>
-                    <url>http://localhost:8080/</url>
-                    <server>TomcatServer</server>
-                    <path>/</path>
-
-                    <warSourceDirectory>
-                        src/main/webapp
-                    </warSourceDirectory>
+                    <webAppConfig>
+                        <baseResource implementation="org.eclipse.jetty.util.resource.ResourceCollection">
+                            <!-- Serve the files from the base directory so we don't have to recompile every time a jsp
+                                 or static file is changed
+                            -->
+                            <resourcesAsCSV>
+                                ${project.basedir}/src/main/webapp
+                            </resourcesAsCSV>
+                        </baseResource>
+                    </webAppConfig>
+                    <war>${project.basedir}/target/i10ds29.war</war>
+                    <contextXml>${project.basedir}/src/main/resources/jetty-context.xml</contextXml>
                 </configuration>
-          <!--      <executions>
-                    <execution>
-                        <id>tomcat-war-exec</id>
-                        <goals>
-                            <goal>exec-war</goal>
-                        </goals>
-                        <phase>package</phase>
-                        <configuration>
-                            <path>/</path>
-                            <warRunDependencies>
-                                <warRunDependency>
-                                    <dependency>
-                                        <groupId>se.lendo.test</groupId>
-                                        <artifactId>lendo-endpoint-searchIn-googlePlace-development</artifactId>
-                                        <version>${project.version}</version>
-                                        <type>war</type>
-                                    </dependency>
-                                </warRunDependency>
-                            </warRunDependencies>
-                        </configuration>
-                    </execution>
-                </executions>
--->
-                <!--<configuration>-->
-                <!--<port>9090</port>-->
-                <!--<path>/</path>-->
-                <!--</configuration>-->
             </plugin>
         </plugins>
     </build>
