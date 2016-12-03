@@ -15,13 +15,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    public SwaggerConfig()
-    {
+    public SwaggerConfig() {
         System.out.println("");
     }
 
     @Bean
-    public Docket customImplementation(){
+    public Docket customImplementation() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
@@ -33,13 +32,12 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "inca Integration REST API",
-                "A REST API for getting information about customers at Folksam",
-                "API used for Folksam Inca information",
+                "lendo search in google place  REST API",
+                "A REST API for getting information about places from google",
+                "API used for lendo test information",
                 "",
-                "FUP@folksam.se",
-                "Folksam standard license",
-                "Folksam standard license"
-        );
+                "ali.yusha.hasan@gmail.com",
+                "", ""
+                );
     }
 }
