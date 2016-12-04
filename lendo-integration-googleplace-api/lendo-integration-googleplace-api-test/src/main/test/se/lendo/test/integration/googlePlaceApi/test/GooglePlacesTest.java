@@ -52,9 +52,9 @@ public class GooglePlacesTest {
     }
 
     @Test
-    public void getPlaceByQuerySearchByRadius(){
+    public void getPlaceByQuerySearchByRadius() {
 
-        if (!findPlace(google.getPlacesByQueryBasedOnRadar("Sergels torg", MAXIMUM_PAGE_RESULTS,2000.0,TypeParam.valueOf("types").searchTypeValue(SearchType.BICYCLE_STORE)),
+        if (!findPlace(google.getPlacesByQueryBasedOnRadar("Sergels torg", MAXIMUM_PAGE_RESULTS, 2000, TypeParam.valueOf("types").searchTypeValue(SearchType.BICYCLE_STORE)),
                 "EcoRide Stockholm Sergels Torg"))
             fail("Test place could not be found at coordinates.");
 

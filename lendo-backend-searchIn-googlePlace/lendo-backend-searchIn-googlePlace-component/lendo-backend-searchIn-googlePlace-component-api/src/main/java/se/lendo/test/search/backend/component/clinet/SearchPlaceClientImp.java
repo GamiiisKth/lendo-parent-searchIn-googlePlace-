@@ -22,7 +22,7 @@ public class SearchPlaceClientImp implements SearchPlaceClient {
     }
 
     @Override
-    public List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, double radius, Param... extraParams) {
+    public List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, int radius, Param... extraParams) {
         return searchPlaceClient.getPlacesByQueryBasedOnRadar(query, limit, radius, extraParams);
     }
 }

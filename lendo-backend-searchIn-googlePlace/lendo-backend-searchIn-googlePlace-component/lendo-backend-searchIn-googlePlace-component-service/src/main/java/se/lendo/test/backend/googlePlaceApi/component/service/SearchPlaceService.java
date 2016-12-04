@@ -21,7 +21,7 @@ public interface SearchPlaceService {
    // solution should be this json object should be mapped to a model in integration-mapper och modelMapper
    List<Place> getPlacesByQuery(String query, int limit, Param... extraParams);
 
-   List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, double radius, Param... extraParams);
+   List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, int radius, Param... extraParams);
 
 
 }

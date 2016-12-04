@@ -11,6 +11,6 @@ import java.util.List;
 public interface SearchPlaceClient {
 
     List<Place> getPlacesByQuery(String query, int limit, Param... extraParams);
-    List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, double radius, Param... extraParams);
+    List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, int radius, Param... extraParams);
 
 }

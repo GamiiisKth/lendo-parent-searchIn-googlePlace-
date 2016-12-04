@@ -24,7 +24,7 @@ public class SearchPlaceServiceImpl implements SearchPlaceService {
     }
 
     @Override
-    public List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, double radius, Param... extraParams) {
+    public List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, int radius, Param... extraParams) {
 
         return placeApiSearchClient.getPlacesByQueryBasedOnRadar(query, limit, radius, extraParams);
 

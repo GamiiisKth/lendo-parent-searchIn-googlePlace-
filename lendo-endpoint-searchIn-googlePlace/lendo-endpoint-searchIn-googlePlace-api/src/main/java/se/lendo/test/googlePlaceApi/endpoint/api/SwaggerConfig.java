@@ -37,7 +37,7 @@ public class SwaggerConfig {
                 "API created for lendo test",
                 "",
                 "ali.yusha.hasan@gmail.com",
-                "", ""
-                );
+                "remember you should choose between one of those types: 'bicycle_store',bus_station,university,gym", ""
+        );
     }
 }

@@ -103,7 +103,7 @@ public class GooglePlaceApiSearchClientImpl implements GooglePlaceApiSearchClien
 
 
     @Override
-    public List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, double radius, Param... extraParams) {
+    public List<Place> getPlacesByQueryBasedOnRadar(String query, int limit, int radius, Param... extraParams) {
 
         try {
             String uri = buildUrl(METHOD_TEXT_SEARCH, String.format("query=%s&key=%s&radius=%s", query, googleApiKey, String.valueOf(radius)), extraParams);
